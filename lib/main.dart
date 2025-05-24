@@ -1,3 +1,5 @@
+import 'screens/welcome_screen.dart'; // Make sure path is correct
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,7 +33,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 223, 68, 25)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const WelcomeScreen(),
+
     );
   }
 }
