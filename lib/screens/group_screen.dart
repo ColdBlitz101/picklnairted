@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class GroupScreen extends StatelessWidget {
   const GroupScreen({Key? key}) : super(key: key);
 
-  static const Color picklGreen = Color(0xFF6ABF4B); // 🍃 Pickl green
+  static const Color picklGreen = Color.fromARGB(255, 46, 190, 135); // 🍃 Pickl green
 
   @override
   Widget build(BuildContext context) {
