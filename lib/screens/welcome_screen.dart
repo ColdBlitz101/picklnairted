@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'group_screen.dart';
+
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
   void _navigateToNextScreen(BuildContext context) {
     // Replace with your actual navigation logic
-    Navigator.pushNamed(context, '/group'); 
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const GroupScreen()),
+);
+
   }
 
   @override
