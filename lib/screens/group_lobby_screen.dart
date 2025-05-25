@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'swipe_screen.dart'; // Adjust path as needed
 
 class GroupLobbyScreen extends StatelessWidget {
   const GroupLobbyScreen({Key? key}) : super(key: key);
@@ -84,12 +85,11 @@ class GroupLobbyScreen extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              // Start button
+              // Start Jar Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // TODO: Navigate to game screen
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Starting jar...")),
                     );
@@ -104,6 +104,33 @@ class GroupLobbyScreen extends StatelessWidget {
                   ),
                   child: const Text(
                     'Start Jar',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 12),
+
+              // Start Swiping Button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SwipeScreen()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: picklGreen,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text(
+                    'Start Swiping',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ),
