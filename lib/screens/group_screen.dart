@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'create_group_screen.dart';
+
 
 class GroupScreen extends StatelessWidget {
   const GroupScreen({Key? key}) : super(key: key);
@@ -38,7 +40,10 @@ class GroupScreen extends StatelessWidget {
               const SizedBox(height: 32),
               ElevatedButton(
                 onPressed: () {
-                  // TODO: Navigate to Create Group
+                  // Inside GroupScreen "Create Group" button onPressed:
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateGroupScreen()),
+);
+
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
