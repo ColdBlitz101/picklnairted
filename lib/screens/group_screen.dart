@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'create_group_screen.dart';
+import 'join_group_screen.dart';
 
 
 class GroupScreen extends StatelessWidget {
@@ -62,8 +63,11 @@ class GroupScreen extends StatelessWidget {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
-                  // TODO: Navigate to Join with Code
-                },
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const JoinGroupScreen()),
+  );
+},
+
+                
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   foregroundColor: picklGreen,
