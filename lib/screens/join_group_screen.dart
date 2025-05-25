@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'group_lobby_screen.dart';
 
 class JoinGroupScreen extends StatefulWidget {
   const JoinGroupScreen({Key? key}) : super(key: key);
@@ -20,7 +21,9 @@ class _JoinGroupScreenState extends State<JoinGroupScreen> {
       return;
     }
 
-    // TODO: Validate and navigate to group
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const GroupLobbyScreen()),
+);
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Joining jar with code "$code"...')),
     );

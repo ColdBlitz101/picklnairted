@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'group_lobby_screen.dart';
 
 class CreateGroupScreen extends StatefulWidget {
   const CreateGroupScreen({Key? key}) : super(key: key);
@@ -69,11 +70,22 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                   onPressed: () {
                     final jarName = _groupNameController.text.trim();
                     if (jarName.isNotEmpty) {
-                      // TODO: Save jar to state/database
+                      // Show confirmation
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Created "$jarName"!')),
                       );
-                      Navigator.pop(context); // Go back or to group view
+
+                      // Navigate to the Group Lobby
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const GroupLobbyScreen(),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Please enter a jar name')),
+                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
