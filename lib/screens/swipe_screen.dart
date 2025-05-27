@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:card_swiper/card_swiper.dart';
+import 'package:swipe_cards/swipe_cards.dart';
 
 class SwipeScreen extends StatefulWidget {
   const SwipeScreen({Key? key}) : super(key: key);
@@ -18,7 +18,36 @@ class _SwipeScreenState extends State<SwipeScreen> {
     'Ramen 🍜',
   ];
 
+  late final MatchEngine _matchEngine;
+
+  List<String> accepted = [];
+  List<String> rejected = [];
+
   static const Color picklGreen = Color(0xFF6ABF4B);
+
+  @override
+  void initState() {
+    super.initState();
+
+    List<SwipeItem> swipeItems = options.map((option) {
+      return SwipeItem(
+        content: option,
+        likeAction: () {
+          accepted.add(option);
+          print('Accepted: $option');
+        },
+        nopeAction: () {
+          rejected.add(option);
+          print('Rejected: $option');
+        },
+        superlikeAction: () {
+          // Optional: not used here
+        },
+      );
+    }).toList();
+
+    _matchEngine = MatchEngine(swipeItems: swipeItems);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +68,10 @@ class _SwipeScreenState extends State<SwipeScreen> {
               ),
               const SizedBox(height: 16),
               Expanded(
-                child: Swiper(
-                  itemCount: options.length,
+                child: SwipeCards(
+                  matchEngine: _matchEngine,
                   itemBuilder: (BuildContext context, int index) {
+                    final option = options[index];
                     return Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -50,7 +80,7 @@ class _SwipeScreenState extends State<SwipeScreen> {
                       elevation: 8,
                       child: Center(
                         child: Text(
-                          options[index],
+                          option,
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -60,20 +90,21 @@ class _SwipeScreenState extends State<SwipeScreen> {
                       ),
                     );
                   },
-                  layout: SwiperLayout.STACK,
-                  itemWidth: MediaQuery.of(context).size.width * 0.85,
-                  itemHeight: MediaQuery.of(context).size.height * 0.6,
-                  onIndexChanged: (index) {
-                    if (index == options.length - 1) {
-                      // Done swiping
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('You’ve swiped all picks!')),
-                      );
-                    }
+                  onStackFinished: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'All done!\nAccepted: ${accepted.join(", ")}\nRejected: ${rejected.join(", ")}',
+                        ),
+                        duration: const Duration(seconds: 4),
+                      ),
+                    );
                   },
-                  onTap: (index) {
-                    print('Tapped on: ${options[index]}');
+                  itemChanged: (SwipeItem item, int index) {
+                    // Optional: do something on each card change
                   },
+                  upSwipeAllowed: false,
+                  fillSpace: true,
                 ),
               ),
             ],
