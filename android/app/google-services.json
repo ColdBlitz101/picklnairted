@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "273960341234",
+    "project_id": "pickl-cd6e3",
+    "storage_bucket": "pickl-cd6e3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273960341234:android:9dc4172f4a36e3a5b1ca6b",
+        "android_client_info": {
+          "package_name": "com.example.picklnairted"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnfF2hDgMsUGDRhZ2zGtp9w76seTBfIzs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

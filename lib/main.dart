@@ -1,8 +1,12 @@
 import 'screens/welcome_screen.dart'; // Make sure path is correct
 
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart'; // Import Firebase
 
-void main() {
+void main() async {
+  // Ensure Flutter bindings are initialized before Firebase
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(); // Initialize Firebase
   runApp(const MyApp());
 }
 
@@ -34,7 +38,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const WelcomeScreen(),
-
     );
   }
 }
