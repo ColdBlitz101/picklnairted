@@ -31,6 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
   swipe_cards: ^2.0.0+1
+  google_fonts: ^6.1.0
+
 
 
 

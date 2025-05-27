@@ -1,71 +1,123 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'group_screen.dart';
 
-
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
-  void _navigateToNextScreen(BuildContext context) {
-    // Replace with your actual navigation logic
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const GroupScreen()),
-);
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
 
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _bounce;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(duration: const Duration(seconds: 1), vsync: this)
+          ..repeat(reverse: true);
+    _bounce = Tween<double>(begin: 0, end: 20).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _navigateToNextScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const GroupScreen()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFFFDD9B5), Color(0xFFBCECE0)],
+            colors: [Color(0xFF47EA99), Colors.white],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 32),
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 48),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Pickle mascot (replace with your asset)
-            Image.asset(
-              'assets/images/pickle.png',
-              height: 150,
-            ),
-            const SizedBox(height: 24),
-            const Text(
-              "Let's Get Picklin’",
+            const SizedBox(height: 40), // space pushing header down
+            Text(
+              "Pickl",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 32,
+              style: GoogleFonts.lexend(
+                fontSize: 72, // increased size
                 fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 16), // slightly more space below header
+            Text(
+              'Stuck in a pickle? Let’s help your group decide!',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.lexend(
+                fontSize: 22, // increased size
+                fontStyle: FontStyle.italic,
                 color: Colors.black87,
               ),
             ),
-            const SizedBox(height: 16),
-            const Text(
-              'The fun way to pick what to do with your friends!',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black54,
+            const Spacer(),
+            AnimatedBuilder(
+              animation: _bounce,
+              builder: (context, child) {
+                return Transform.translate(
+                  offset: Offset(0, -_bounce.value),
+                  child: child,
+                );
+              },
+              child: Hero(
+                tag: 'mascot',
+                child: Image.asset(
+                  'assets/images/pickle.png',
+                  height: size.height * 0.45, // bigger image
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
-            const SizedBox(height: 40),
+            const Spacer(),
             ElevatedButton(
               onPressed: () => _navigateToNextScreen(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF50BFA0),
-                minimumSize: const Size.fromHeight(50),
+                elevation: 6,
+                shadowColor: Colors.black38,
+                padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20), // wider horizontally
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
               child: const Text(
                 'Get Started',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.1,
+                  color: Colors.white,
+                ),
               ),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
