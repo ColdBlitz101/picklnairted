@@ -32,7 +32,8 @@ dependencies:
     sdk: flutter
   swipe_cards: ^2.0.0+1
   google_fonts: ^6.1.0
-
+  firebase_core: ^2.27.0
+  firebase_auth: ^4.17.4
 
 
 
