@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'group_screen.dart';
+import 'login_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -17,9 +17,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(duration: const Duration(seconds: 1), vsync: this)
-          ..repeat(reverse: true);
+    _controller = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    )..repeat(reverse: true);
+
     _bounce = Tween<double>(begin: 0, end: 20).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
@@ -31,10 +33,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     super.dispose();
   }
 
-  void _navigateToNextScreen(BuildContext context) {
+  void _navigateToLogin(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const GroupScreen()),
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
     );
   }
 
@@ -57,22 +59,22 @@ class _WelcomeScreenState extends State<WelcomeScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 40), // space pushing header down
+            const SizedBox(height: 40),
             Text(
               "Pickl",
               textAlign: TextAlign.center,
               style: GoogleFonts.lexend(
-                fontSize: 72, // increased size
+                fontSize: 72,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
             ),
-            const SizedBox(height: 16), // slightly more space below header
+            const SizedBox(height: 16),
             Text(
               'Stuck in a pickle? Let’s help your group decide!',
               textAlign: TextAlign.center,
               style: GoogleFonts.lexend(
-                fontSize: 22, // increased size
+                fontSize: 22,
                 fontStyle: FontStyle.italic,
                 color: Colors.black87,
               ),
@@ -90,19 +92,19 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 tag: 'mascot',
                 child: Image.asset(
                   'assets/images/pickle.png',
-                  height: size.height * 0.45, // bigger image
+                  height: size.height * 0.45,
                   fit: BoxFit.contain,
                 ),
               ),
             ),
             const Spacer(),
             ElevatedButton(
-              onPressed: () => _navigateToNextScreen(context),
+              onPressed: () => _navigateToLogin(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF50BFA0),
                 elevation: 6,
                 shadowColor: Colors.black38,
-                padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20), // wider horizontally
+                padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
