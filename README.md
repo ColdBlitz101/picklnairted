@@ -29,15 +29,6 @@ Pickl is a Flutter-based mobile app that helps groups make decisions together �
 
 ---
 
-## 📸 Screenshots
-
-> Add your own screenshots or demo GIFs here.  
-> Example:
->
-> ![Welcome Screen](assets/images/pickle.png)
-
----
-
 ## 🔧 Getting Started
 
 ### Prerequisites
